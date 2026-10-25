@@ -1,32 +1,20 @@
 package tsp;
 
 /**
- * Motor de reducción polinomial TSP (decisión) <=p SAT.
- *
- * <h3>Variables booleanas</h3>
- * <ul>
- *   <li>x(i,t): la ciudad i se visita en el paso t (N*N variables).</li>
- *   <li>c(t,v): el costo acumulado de las aristas 0..t es >= v (variables auxiliares
- *       del "contador secuencial ponderado" que codifica la suma de costos).</li>
- * </ul>
- *
- * <h3>Restricciones</h3>
- * <ol>
- *   <li>Visita única: cada ciudad aparece en exactamente un paso.</li>
- *   <li>Ocupación única: cada paso tiene exactamente una ciudad.</li>
- *   <li>Costo: la suma de las N aristas del ciclo es <= K. La arista del paso t
- *       va de la ciudad i (paso t) a la ciudad j (paso t+1 mod N) y cuesta d(i,j).</li>
- * </ol>
- *
- * <h3>Optimizaciones (todas preservan la equivalencia lógica)</h3>
- * <ul>
- *   <li>Ruptura de simetría: el ciclo no cambia si se rota, así que se fija la ciudad 0 en el paso 0.</li>
- *   <li>K efectivo: ningún ciclo puede costar más que N * (distancia máxima), así que K se acota a ese valor.</li>
- *   <li>Cota inferior: al paso t le faltan (N-1-t) aristas que cuestan al menos dmin cada una, por lo
- *       que el acumulado en t no puede superar K - (N-1-t)*dmin. Esto reduce el tamaño de cada contador.</li>
- *   <li>Aristas imposibles: si una arista ya excede ese tope se prohíbe con una sola cláusula binaria.</li>
- *   <li>Se omiten las cláusulas que ya están satisfechas por la ciudad fija (origen/destino imposibles).</li>
- * </ul>
+Motor de reducción polinomial TSP (decisión) <=p SAT.
+Variables booleanas
+    x(i,t): la ciudad i se visita en el paso t (N*N variables).
+    c(t,v): el costo acumulado de las aristas 0..t es >= v (variables auxiliares del "contador secuencial ponderado" que codifica la suma de costos).
+Restricciones
+    Visita única: cada ciudad aparece en exactamente un paso.
+    Ocupación única: cada paso tiene exactamente una ciudad.
+    Costo: la suma de las N aristas del ciclo es <= K. La arista del paso t va de la ciudad i (paso t) a la ciudad j (paso t+1 mod N) y cuesta d(i,j).
+Optimizaciones (todas preservan la equivalencia lógica)
+    Ruptura de simetría: el ciclo no cambia si se rota, así que se fija la ciudad 0 en el paso 0.
+    K efectivo: ningún ciclo puede costar más que N * (distancia máxima), así que K se acota a ese valor.
+    Cota inferior: al paso t le faltan (N-1-t) aristas que cuestan al menos dmin cada una, por lo que el acumulado en t no puede superar K - (N-1-t)*dmin. Esto reduce el tamaño de cada contador.
+    Aristas imposibles: si una arista ya excede ese tope se prohíbe con una sola cláusula binaria.
+    Se omiten las cláusulas que ya están satisfechas por la ciudad fija (origen/destino imposibles).
  */
 public final class ReductorTspSat {
 
