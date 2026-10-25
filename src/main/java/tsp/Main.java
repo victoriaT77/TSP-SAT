@@ -153,8 +153,10 @@ public final class Main {
         System.out.println();
         System.out.println("Uso (elegir UNA entrada):");
         System.out.println("  Main <archivo.txt> [--k K]");
+        System.out.println("     Ejemplo: java -jar target/tsp-sat.jar instancias/n4_sat.txt");
         System.out.println("  Main --distancias \"0 5 9;5 0 4;9 4 0\" --k K");
+        System.err.println("     Ejemplo: java -jar target/tsp-sat.jar --distancias \"0 10 15 20;10 0 35 25;15 35 0 30;20 25 30 0\" --k 80");
         System.out.println("  Main --aleatoria N --k K [--distmax D] [--semilla S]");
-        System.out.println();
+        System.out.println("     Ejemplo: java -jar target/tsp-sat.jar --aleatoria 8 --k 40 --distmax 10 --semilla 1");
     }
 }
