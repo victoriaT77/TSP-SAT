@@ -1,4 +1,4 @@
-# N=4, K=80. El optimo es 80  -> SATISFACIBLE
+# N=4, K=80. El optimo es 80  -> SATISFIABLE
 # Formato: N, K y luego la matriz de distancias (N filas)
 4
 80

@@ -156,11 +156,5 @@ public final class Main {
         System.out.println("  Main --distancias \"0 5 9;5 0 4;9 4 0\" --k K");
         System.out.println("  Main --aleatoria N --k K [--distmax D] [--semilla S]");
         System.out.println();
-        System.out.println("Opciones:");
-        System.out.println("  --k K          umbral de costo (obligatorio salvo que lo traiga el archivo)");
-        System.out.println("  --cnf ARCHIVO  dónde guardar el DIMACS generado (por defecto tsp.cnf)");
-        System.out.println("  --timeout S    límite del solver en segundos (por defecto " + TIMEOUT_POR_DEFECTO + ")");
-        System.out.println("  --detalle      muestra las variables x(i,t) verdaderas");
-        System.out.println("  --ayuda        muestra este mensaje");
     }
 }

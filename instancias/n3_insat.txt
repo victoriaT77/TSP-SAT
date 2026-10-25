@@ -1,4 +1,4 @@
-# N=3, K=5. El unico costo posible es 6  -> INSATISFACIBLE
+# N=3, K=5. El unico costo posible es 6  -> UNSATISFIABLE
 3
 5
 0 1 2

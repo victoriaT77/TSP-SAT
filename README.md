@@ -1,4 +1,4 @@
-# Reducción polinomial TSP a SAT (Java + Sat4j)
+# Reducción polinomial TSP ≤p SAT (Java + Sat4j)
 
 Trabajo práctico de demostración experimental de la NP-completitud.
 El programa recibe una instancia del **Problema del Viajante (TSP)** en su versión de decisión
@@ -105,21 +105,8 @@ java -jar target/tsp-sat.jar --distancias "0 10 15 20;10 0 35 25;15 35 0 30;20 2
 java -jar target/tsp-sat.jar --aleatoria 8 --k 40 --distmax 10 --semilla 1
 ```
 
-### Opciones
-
-| Opción | Descripción | Por defecto |
-|---|---|---|
-| `--k K` | Umbral de costo. Obligatorio con `--distancias` y `--aleatoria` | el del archivo |
-| `--cnf ARCHIVO` | Dónde guardar el DIMACS generado | `tsp.cnf` |
-| `--timeout S` | Límite de tiempo del solver en segundos | 300 |
-| `--detalle` | Muestra las variables `x(i,t)` verdaderas (el certificado) | desactivado |
-| `--distmax D` | Distancia máxima en el modo aleatorio | 10 |
-| `--semilla S` | Semilla del generador aleatorio (reproducible) | 1 |
-| `--ayuda` | Muestra la ayuda | |
-
 ### Formato del archivo de entrada
 ```
-# Las líneas que empiezan con # son comentarios
 4              <- N (número de ciudades)
 80             <- K (costo máximo permitido)
 0 10 15 20     <- fila 0 de la matriz de distancias
@@ -142,7 +129,7 @@ Costo real: 80 (<= K=80)
 (La ruta puede salir en el sentido contrario, `0 -> 2 -> 3 -> 1 -> 0`, con el mismo costo;
 los tiempos varían según la máquina.)
 
-**Caso insatisfacible** (`n4_insat.txt`):
+**Caso insatisfacible** (`n4_unsat.txt`):
 ```
 N=4  K=79
 CNF: 276 variables, 1549 cláusulas (reducción en 37 ms) -> tsp.cnf
@@ -259,15 +246,3 @@ a 280 variables / 1567 cláusulas, con el mismo resultado.
 | Ruta y costo real si es SAT | `DecodificadorRuta` y `Main` |
 
 ---
-
-## 11. Solución de problemas
-
-| Problema | Causa y solución |
-|---|---|
-| `Unable to access jarfile target/tsp-sat.jar` | Aún no has compilado. Ejecuta `mvn clean package`. |
-| `mvn: command not found` | Instala Maven (sección 1). |
-| `release version ... not supported` / falta `javac` | Instala el JDK completo (`java-latest-openjdk-devel`), no solo el JRE. |
-| Solo aparece el mensaje de uso | Ejecutaste `Main` sin argumentos. Pasa un archivo, `--distancias` o `--aleatoria`. |
-| Fallan las pruebas durante `mvn package` | Usa `mvn clean package -DskipTests` y revisa el error con `mvn test`. |
-| `La instancia generaría demasiadas cláusulas` | N o K son muy grandes para el contador. Reduce uno de los dos. |
-| `TIEMPO_AGOTADO` | Sat4j no terminó dentro de `--timeout`; aumenta el límite o reduce N. Es el punto de quiebre. |

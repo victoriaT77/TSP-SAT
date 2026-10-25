@@ -24,7 +24,7 @@
         "request": "launch",
         "mainClass": "tsp.Main",
         "args": [
-            "instancias/n4_insat.txt"
+            "instancias/n4_unsat.txt"
         ]
     },
     {

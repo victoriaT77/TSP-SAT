@@ -1,4 +1,4 @@
-# N=4, K=79. El optimo es 80  -> INSATISFACIBLE
+# N=4, K=79. El optimo es 80  -> UNSATISFIABLE
 4
 79
 0 10 15 20
