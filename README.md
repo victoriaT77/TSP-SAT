@@ -203,7 +203,7 @@ varias semillas y repite las mediciones para tener datos más confiables.
 
 ## 8. Compilar sin Maven (alternativa)
 
-1. Descarga `org.ow2.sat4j.core-2.3.6.jar` desde Maven Central.
+1. Descarga `org.ow2.sat4j.core-2.3.6.jar` desde [Maven Central](https://repo.maven.apache.org/maven2/org/ow2/sat4j/org.ow2.sat4j.core/2.3.6/).
 2. Compila y ejecuta:
 ```bash
 mkdir -p out
@@ -255,8 +255,8 @@ a 280 variables / 1567 cláusulas, con el mismo resultado.
 | Variables booleanas + DIMACS | `ReductorTspSat` y `FormulaCnf` |
 | Visita única, ocupación única, costo | `ReductorTspSat` |
 | Sat4j | `EjecutorSat` |
-| Mensaje UNSAT exacto | `Principal` imprime: `NO existe ninguna ruta con costo menor o igual a K` |
-| Ruta y costo real si es SAT | `DecodificadorRuta` y `Principal` |
+| Mensaje UNSAT exacto | `Main` imprime: `NO existe ninguna ruta con costo menor o igual a K` |
+| Ruta y costo real si es SAT | `DecodificadorRuta` y `Main` |
 
 ---
 
@@ -267,8 +267,7 @@ a 280 variables / 1567 cláusulas, con el mismo resultado.
 | `Unable to access jarfile target/tsp-sat.jar` | Aún no has compilado. Ejecuta `mvn clean package`. |
 | `mvn: command not found` | Instala Maven (sección 1). |
 | `release version ... not supported` / falta `javac` | Instala el JDK completo (`java-latest-openjdk-devel`), no solo el JRE. |
-| Solo aparece el mensaje de uso | Ejecutaste `Principal` sin argumentos. Pasa un archivo, `--distancias` o `--aleatoria`. |
+| Solo aparece el mensaje de uso | Ejecutaste `Main` sin argumentos. Pasa un archivo, `--distancias` o `--aleatoria`. |
 | Fallan las pruebas durante `mvn package` | Usa `mvn clean package -DskipTests` y revisa el error con `mvn test`. |
 | `La instancia generaría demasiadas cláusulas` | N o K son muy grandes para el contador. Reduce uno de los dos. |
 | `TIEMPO_AGOTADO` | Sat4j no terminó dentro de `--timeout`; aumenta el límite o reduce N. Es el punto de quiebre. |
-| Quedaron clases viejas (`Main`, `Benchmark`, ...) | Borra la carpeta `target/` y los `.java` antiguos de `src/`, y recompila con `mvn clean package`. |
