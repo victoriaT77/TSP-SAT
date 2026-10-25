@@ -1,0 +1,6 @@
+# N=3, K=5. El unico costo posible es 6  -> INSATISFACIBLE
+3
+5
+0 1 2
+1 0 3
+2 3 0

@@ -20,21 +20,6 @@ Si la fórmula es satisfacible, el programa lee el modelo y reconstruye la ruta.
 | Apache Maven | 3.6 o superior | Descarga Sat4j y JUnit, compila y empaqueta |
 | Conexión a internet | solo la primera vez | Maven descarga las dependencias |
 
-### Instalación en Fedora
-```bash
-sudo dnf install java-latest-openjdk-devel maven
-java -version      # debe mostrar 11 o superior
-javac -version     # debe existir (viene en el paquete -devel)
-mvn -version
-```
-
-### Instalación en Ubuntu / Debian
-```bash
-sudo apt install default-jdk maven
-```
-
----
-
 ## 2. Estructura del proyecto
 
 ```
@@ -50,7 +35,7 @@ tsp-sat/
 │   └── n4_insat.txt                N=4, K=79  -> insatisfacible
 └── src/
     ├── main/java/tsp/
-    │   ├── Principal.java          Punto de entrada y lectura de argumentos
+    │   ├── Main.java               Punto de entrada y lectura de argumentos
     │   ├── LectorGrafo.java        Lee la instancia (archivo, consola o aleatoria)
     │   ├── InstanciaTsp.java       Datos del problema: N, matriz de distancias, K
     │   ├── ReductorTspSat.java     MOTOR DE REDUCCIÓN: TSP -> cláusulas CNF
@@ -287,13 +272,3 @@ a 280 variables / 1567 cláusulas, con el mismo resultado.
 | `La instancia generaría demasiadas cláusulas` | N o K son muy grandes para el contador. Reduce uno de los dos. |
 | `TIEMPO_AGOTADO` | Sat4j no terminó dentro de `--timeout`; aumenta el límite o reduce N. Es el punto de quiebre. |
 | Quedaron clases viejas (`Main`, `Benchmark`, ...) | Borra la carpeta `target/` y los `.java` antiguos de `src/`, y recompila con `mvn clean package`. |
-
----
-
-## 12. Control de versiones (Git)
-```bash
-git init
-git add .
-git commit -m "TSP a SAT con Sat4j"
-```
-El archivo `.gitignore` ya excluye `target/` y los `*.cnf` generados.

@@ -1,0 +1,6 @@
+# N=3, K=6. Cualquier ciclo cuesta 1+3+2 = 6  -> SATISFACIBLE
+3
+6
+0 1 2
+1 0 3
+2 3 0

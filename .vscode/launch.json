@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "java",
+        "name": "Main",
+        "request": "launch",
+        "mainClass": "tsp.Main",
+        "projectName": "tsp-sat"
+    },
+    {
+        "type": "java",
+        "name": "Main - n4 satisfacible",
+        "request": "launch",
+        "mainClass": "tsp.Main",
+        "args": [
+            "instancias/n4_sat.txt",
+            "--detalle"
+        ]
+    },
+    {
+        "type": "java",
+        "name": "Main - n4 insatisfacible",
+        "request": "launch",
+        "mainClass": "tsp.Main",
+        "args": [
+            "instancias/n4_insat.txt"
+        ]
+    },
+    {
+        "type": "java",
+        "name": "Main - distancias por consola",
+        "request": "launch",
+        "mainClass": "tsp.Main",
+        "args": [
+            "--distancias",
+            "0 10 15 20;10 0 35 25;15 35 0 30;20 25 30 0",
+            "--k",
+            "80"
+        ]
+    },
+    {
+        "type": "java",
+        "name": "Pruebas de rendimiento",
+        "request": "launch",
+        "mainClass": "tsp.PruebasRendimiento",
+        "args": [
+            "--tamanos",
+            "3,4,6,8,10",
+            "--timeout",
+            "60"
+        ]
+    }
+]
+}
