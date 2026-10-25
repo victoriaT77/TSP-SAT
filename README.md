@@ -139,7 +139,30 @@ NO existe ninguna ruta con costo menor o igual a K
 
 ---
 
-## 5. Pruebas unitarias
+## 5. Usar VS Code
+
+1. Abre la carpeta `tsp-sat/` (la que contiene `pom.xml`) con la extensión *Extension Pack for Java*.
+2. El archivo `.vscode/launch.json` ya trae configuraciones: pulsa **Run and Debug** (Ctrl+Shift+D),
+   elige una (por ejemplo *Principal - n4 satisfacible*) y presiona ▶.
+3. Si ejecutas `Principal` con el botón ▶ de la esquina sin argumentos, solo verás la ayuda.
+   Para pasar argumentos, usa las configuraciones de `launch.json`.
+
+---
+
+## 6. Compilar sin Maven (alternativa)
+
+1. Descarga `org.ow2.sat4j.core-2.3.6.jar` desde [Maven Central](https://repo.maven.apache.org/maven2/org/ow2/sat4j/org.ow2.sat4j.core/2.3.6/).
+2. Compila y ejecuta:
+```bash
+mkdir -p out
+javac -encoding UTF-8 -cp org.ow2.sat4j.core-2.3.6.jar -d out src/main/java/tsp/*.java
+java -cp out:org.ow2.sat4j.core-2.3.6.jar tsp.Principal instancias/n4_sat.txt
+```
+(En Windows el separador del classpath es `;` en lugar de `:`.)
+
+---
+
+## 7. Pruebas unitarias
 
 ```bash
 mvn test
@@ -157,7 +180,7 @@ Las pruebas (`ReduccionTspSatTest`) verifican que:
 
 ---
 
-## 6. Pruebas de rendimiento (tabla del informe)
+## 7. Pruebas de rendimiento 
 
 ```bash
 java -cp target/tsp-sat.jar tsp.PruebasRendimiento --tamanos 3,4,6,8,10,12,14 --factores 0.3,0.5 --timeout 120
@@ -171,33 +194,9 @@ java -cp target/tsp-sat.jar tsp.PruebasRendimiento --tamanos 3,4,6,8,10,12,14 --
 | `--semilla` | Semilla aleatoria | 1 |
 | `--timeout` | Segundos máximos por instancia | 120 |
 
-Imprime una tabla en Markdown con N, K, variables, cláusulas, tiempo de reducción, tiempo de
-Sat4j y resultado. Para cada factor se detiene en el primer `TIEMPO_AGOTADO` (el **punto de
-quiebre**). Un factor chico acerca K al óptimo y suele dar instancias más difíciles; prueba
+Imprime una tabla con N, K, variables, cláusulas, tiempo de reducción, tiempo de
+Sat4j y resultado. Para cada factor se detiene en el primer `TIEMPO_AGOTADO` (el punto de quiebre). Un factor chico acerca K al óptimo y suele dar instancias más difíciles; prueba
 varias semillas y repite las mediciones para tener datos más confiables.
-
----
-
-## 7. Usar VS Code
-
-1. Abre la carpeta `tsp-sat/` (la que contiene `pom.xml`) con la extensión *Extension Pack for Java*.
-2. El archivo `.vscode/launch.json` ya trae configuraciones: pulsa **Run and Debug** (Ctrl+Shift+D),
-   elige una (por ejemplo *Principal - n4 satisfacible*) y presiona ▶.
-3. Si ejecutas `Principal` con el botón ▶ de la esquina sin argumentos, solo verás la ayuda.
-   Para pasar argumentos, usa las configuraciones de `launch.json`.
-
----
-
-## 8. Compilar sin Maven (alternativa)
-
-1. Descarga `org.ow2.sat4j.core-2.3.6.jar` desde [Maven Central](https://repo.maven.apache.org/maven2/org/ow2/sat4j/org.ow2.sat4j.core/2.3.6/).
-2. Compila y ejecuta:
-```bash
-mkdir -p out
-javac -encoding UTF-8 -cp org.ow2.sat4j.core-2.3.6.jar -d out src/main/java/tsp/*.java
-java -cp out:org.ow2.sat4j.core-2.3.6.jar tsp.Principal instancias/n4_sat.txt
-```
-(En Windows el separador del classpath es `;` en lugar de `:`.)
 
 ---
 
@@ -214,18 +213,6 @@ java -cp out:org.ow2.sat4j.core-2.3.6.jar tsp.Principal instancias/n4_sat.txt
    prohibir aristas sueltas mayores que K, porque el costo es una *suma*; por eso se usa un
    **contador secuencial ponderado** que convierte esa suma en cláusulas.
 
-**Optimizaciones** (todas mantienen la equivalencia lógica)
-- Ruptura de simetría: se fija la ciudad 0 en el paso 0 (un ciclo rotado es el mismo ciclo).
-- K efectivo: ningún ciclo cuesta más que N · (distancia máxima), así que K se acota a ese valor.
-- Cota inferior: al paso *t* le faltan N−1−t aristas de costo ≥ dmin, lo que reduce el tamaño de cada contador.
-- Aristas imposibles: se prohíben con una sola cláusula binaria.
-- Se omiten cláusulas ya satisfechas por la ciudad fija.
-- Memoria: las cláusulas se guardan en un único arreglo de enteros (formato DIMACS en memoria).
-- Límite de seguridad: si la instancia generaría demasiadas cláusulas, el programa avisa en vez de agotar la memoria.
-
-Con el ejemplo `n4_sat.txt` estas optimizaciones bajaron la fórmula de 340 variables / 4264 cláusulas
-a 280 variables / 1567 cláusulas, con el mismo resultado.
-
 **Complejidad de la reducción:** O(N³ · K) cláusulas. Es polinomial en N para K acotado y
 *pseudo*-polinomial en K, porque K se codifica en "unario" mediante el contador.
 
@@ -237,7 +224,7 @@ a 280 variables / 1567 cláusulas, con el mismo resultado.
 |---|---|
 | Java 11+ | `pom.xml` (source/target 11) |
 | Prohibido resolver el TSP internamente | Solo `EjecutorSat` + Sat4j deciden; el resto traduce o lee |
-| Entrada por archivo o consola | `LectorGrafo` y `Principal` (archivo, `--distancias`, `--aleatoria`) |
+| Entrada por archivo o consola | `LectorGrafo` y `Main` (archivo, `--distancias`, `--aleatoria`) |
 | Modularidad | Lector, reductor/CNF, ejecutor del solver y decodificador están en clases separadas |
 | Variables booleanas + DIMACS | `ReductorTspSat` y `FormulaCnf` |
 | Visita única, ocupación única, costo | `ReductorTspSat` |
