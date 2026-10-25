@@ -46,8 +46,7 @@ tsp-sat/
     │   ├── DecodificadorRuta.java  Modelo booleano -> ruta
     │   ├── ProcesoTspSat.java      Encadena las 3 fases automáticamente
     │   └── PruebasRendimiento.java Genera la tabla de rendimiento del informe
-    └── test/java/tsp/
-        └── ReduccionTspSatTest.java  Pruebas unitarias (JUnit 5)
+    └ 
 ```
 
 Flujo de datos:
@@ -159,24 +158,6 @@ javac -encoding UTF-8 -cp org.ow2.sat4j.core-2.3.6.jar -d out src/main/java/tsp/
 java -cp out:org.ow2.sat4j.core-2.3.6.jar tsp.Principal instancias/n4_sat.txt
 ```
 (En Windows el separador del classpath es `;` en lugar de `:`.)
-
----
-
-## 7. Pruebas unitarias
-
-```bash
-mvn test
-```
-
-Las pruebas (`ReduccionTspSatTest`) verifican que:
-- con K igual al óptimo (80) la fórmula es satisfacible y la ruta tiene costo 80;
-- con K = 79 y con K = 0 es insatisfacible;
-- con K enorme es satisfacible;
-- en 20 instancias aleatorias pequeñas (N = 3 a 6, con distancias 0 y matrices asimétricas),
-  Sat4j responde igual que la respuesta correcta para K = óptimo − 1, óptimo y óptimo + 1.
-
-> La comprobación "respuesta correcta" usa fuerza bruta **únicamente dentro del archivo de
-> pruebas**, para validar la reducción. El programa principal nunca la utiliza.
 
 ---
 
