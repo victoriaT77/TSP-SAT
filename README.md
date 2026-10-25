@@ -1,4 +1,4 @@
-# Reducción polinomial TSP ≤p SAT (Java + Sat4j)
+# Reducción polinomial TSP a SAT (Java + Sat4j)
 
 Trabajo práctico de demostración experimental de la NP-completitud.
 El programa recibe una instancia del **Problema del Viajante (TSP)** en su versión de decisión
