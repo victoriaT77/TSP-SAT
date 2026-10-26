@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     { "type": "java", "name": "n3 satisfacible",   "request": "launch", "mainClass": "tsp.Main", "args": ["instancias/n3_sat.txt", "--detalle"] },
-    { "type": "java", "name": "n3 insatisfacible", "request": "launch", "mainClass": "tsp.Main", "args": ["instancias/n3_unsat.txt"] },
+    { "type": "java", "name": "n3 insatisfacible", "request": "launch", "mainClass": "tsp.Main", "args": ["instancias/n3_insat.txt"] },
     
     {
         "type": "java",
@@ -12,7 +12,7 @@
         "projectName": "tsp-sat"
     },
     { "type": "java", "name": "n4 satisfacible",   "request": "launch", "mainClass": "tsp.Main", "args": ["instancias/n4_sat.txt", "--detalle"] },
-    { "type": "java", "name": "n4 insatisfacible", "request": "launch", "mainClass": "tsp.Main", "args": ["instancias/n4_unsat.txt"] },
+    { "type": "java", "name": "n4 insatisfacible", "request": "launch", "mainClass": "tsp.Main", "args": ["instancias/n4_insat.txt"] },
     { "type": "java", "name": "distancias por consola", "request": "launch", "mainClass": "tsp.Main",
       "args": ["--distancias", "0 10 15 20;10 0 35 25;15 35 0 30;20 25 30 0", "--k", "80"] },
     {
